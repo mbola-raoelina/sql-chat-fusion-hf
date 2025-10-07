@@ -1,0 +1,86 @@
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment and secrets
+.env
+.env.local
+*.key
+*.pem
+
+# Scripts with credentials
+start_app.ps1
+start_app.bat
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Logs and databases
+*.log
+*.db
+*.sqlite3
+sqlgen_debug_*.log
+
+# Temporary files
+*.tmp
+*.temp
+temp_*
+test_*
+diagnostic_*.txt
+
+# Documentation
+*.md
+!README.md
+DEPLOYMENT.md
+QUICK_START.md
+
+# Deployment scripts
+push_both.ps1
+push_both.bat
+sync_*.bat
+sync_*.sh
+setup_enhanced.py
+
+# Test files
+test_*.py
+*_test.py
+
+# ChromaDB (if using Pinecone)
+chroma_db/
+
+# Backup files
+*.bak
+*.backup
+

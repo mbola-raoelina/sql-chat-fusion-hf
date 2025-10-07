@@ -3,9 +3,8 @@ title: Oracle SQL Assistant - Bedrock Enhanced
 emoji: 🤖
 colorFrom: blue
 colorTo: purple
-sdk: gradio
-sdk_version: "4.44.0"
-app_file: app_enhanced.py
+sdk: docker
+app_port: 7860
 pinned: false
 ---
 

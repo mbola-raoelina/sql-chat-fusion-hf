@@ -96,9 +96,9 @@ RETRIEVE_K = 150  # Increased for Pinecone mode to compensate for lack of metada
 OLLAMA_API_URL = "http://localhost:11434/api/chat"
 OLLAMA_TIMEOUT = 120  # 2 minutes for faster fallback
 
-# Model preference - Use Hugging Face models for HF Spaces
-PREFER_OLLAMA = False  # Use Hugging Face models in HF Spaces
-USE_HF_MODELS = True  # Enable Hugging Face models for HF Spaces
+# Model preference - Use API-based models (OpenAI/Bedrock) for HF Spaces
+PREFER_OLLAMA = False  # Disable local Ollama
+USE_HF_MODELS = False  # Disable local HF models (use API-based models instead)
 
 # OpenAI configuration
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
@@ -3784,15 +3784,23 @@ find the semantically closest one from the list above.
         logger.warning(f"Model {model} failed, trying with fallback models")
         
         # Choose fallback models based on original model type
+        # IMPORTANT: Only use API-based models for HF Spaces (no local HF/Ollama models)
         if model.startswith("gpt-") or model.startswith("o1-"):
             # OpenAI fallbacks
             fallback_models = ["gpt-4o-mini", "gpt-3.5-turbo"]
         elif model.startswith("sqlcoder:") or model.startswith("llama") or model.startswith("mistral"):
-            # Ollama fallbacks
-            fallback_models = ["llama3:8b", "sqlcoder:7b", "mistral:instruct"]
+            # Ollama fallbacks (not available in HF Spaces, fallback to OpenAI)
+            if OPENAI_API_KEY and openai_client:
+                fallback_models = ["gpt-4o-mini", "gpt-3.5-turbo"]
+            else:
+                fallback_models = ["llama3:8b", "sqlcoder:7b", "mistral:instruct"]
         else:
-            # Hugging Face fallbacks (default for HF Spaces)
-            fallback_models = ["defog/sqlcoder-7b-2", "distilgpt2"]
+            # For all other models, fallback to OpenAI API (no local HF models)
+            if OPENAI_API_KEY and openai_client:
+                fallback_models = ["gpt-4o-mini", "gpt-3.5-turbo"]
+            else:
+                # No API available - try local models if available
+                fallback_models = ["defog/sqlcoder-7b-2", "distilgpt2"]
         
         for fallback_model in fallback_models:
             try:
