@@ -53,8 +53,9 @@ except ImportError:
 def setup_logging():
     """Setup logging with file and console handlers"""
     try:
-        # Create debug filename with timestamp
-        debug_filename = f'sqlgen_debug_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
+        # Try to write to /tmp/ directory in Docker/HF Spaces (writable)
+        log_dir = '/tmp' if os.path.exists('/tmp') else '.'
+        debug_filename = os.path.join(log_dir, f'sqlgen_debug_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
         
         # Configure logging with both file and console handlers
         logging.basicConfig(
@@ -72,7 +73,7 @@ def setup_logging():
         logger.info(f"Debug log file: {debug_filename}")
         return logger
         
-    except Exception as e:
+    except (PermissionError, OSError) as e:
         # Fallback to console-only logging if file logging fails
         logging.basicConfig(
             level=logging.DEBUG,
@@ -437,9 +438,22 @@ try:
     from openai import OpenAI
     # Check if OpenAI API key is available
     if os.getenv('OPENAI_API_KEY'):
-        # Initialize OpenAI client with minimal configuration to avoid compatibility issues
-        openai_client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-        logger.info("OpenAI client initialized successfully")
+        # Initialize OpenAI client with minimal configuration
+        # IMPORTANT: Don't pass any proxy-related parameters for compatibility
+        try:
+            openai_client = OpenAI(
+                api_key=os.getenv('OPENAI_API_KEY'),
+                max_retries=2,
+                timeout=60.0
+            )
+            logger.info("OpenAI client initialized successfully")
+        except TypeError as te:
+            # Fallback if newer OpenAI client doesn't accept these params
+            if "unexpected keyword argument" in str(te):
+                openai_client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+                logger.info("OpenAI client initialized successfully (minimal config)")
+            else:
+                raise te
     else:
         logger.info("OpenAI API key not found - using Hugging Face models only")
         openai_client = None

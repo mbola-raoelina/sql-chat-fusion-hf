@@ -20,32 +20,43 @@ from requests import Session
 excel_logger = logging.getLogger('excel_generator')
 excel_logger.setLevel(logging.INFO)
 
-# Create a dedicated Excel generation log file
-excel_log_file = f'excel_debug_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
-
-# Clear any existing handlers for this specific logger
-for handler in excel_logger.handlers[:]:
-    excel_logger.removeHandler(handler)
-
-# Create file handler for Excel generation logs
-excel_file_handler = logging.FileHandler(excel_log_file, mode='w')
-excel_file_handler.setLevel(logging.INFO)
-
-# Create console handler
-excel_console_handler = logging.StreamHandler()
-excel_console_handler.setLevel(logging.INFO)
-
-# Create formatter
-excel_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-excel_file_handler.setFormatter(excel_formatter)
-excel_console_handler.setFormatter(excel_formatter)
-
-# Add handlers to the logger
-excel_logger.addHandler(excel_file_handler)
-excel_logger.addHandler(excel_console_handler)
-
-excel_logger.info("=== EXCEL GENERATOR LOGGING INITIALIZED ===")
-excel_logger.info(f"Excel log file: {excel_log_file}")
+# Create a dedicated Excel generation log file (with fallback for Docker)
+try:
+    # Try to write to /tmp/ directory in Docker/HF Spaces (writable)
+    log_dir = '/tmp' if os.path.exists('/tmp') else '.'
+    excel_log_file = os.path.join(log_dir, f'excel_debug_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
+    
+    # Clear any existing handlers for this specific logger
+    for handler in excel_logger.handlers[:]:
+        excel_logger.removeHandler(handler)
+    
+    # Create file handler for Excel generation logs
+    excel_file_handler = logging.FileHandler(excel_log_file, mode='w')
+    excel_file_handler.setLevel(logging.INFO)
+    
+    # Create console handler
+    excel_console_handler = logging.StreamHandler()
+    excel_console_handler.setLevel(logging.INFO)
+    
+    # Create formatter
+    excel_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    excel_file_handler.setFormatter(excel_formatter)
+    excel_console_handler.setFormatter(excel_formatter)
+    
+    # Add handlers to the logger
+    excel_logger.addHandler(excel_file_handler)
+    excel_logger.addHandler(excel_console_handler)
+    
+    excel_logger.info("=== EXCEL GENERATOR LOGGING INITIALIZED ===")
+    excel_logger.info(f"Excel log file: {excel_log_file}")
+except (PermissionError, OSError) as e:
+    # Fallback to console-only logging if file logging fails
+    excel_console_handler = logging.StreamHandler()
+    excel_console_handler.setLevel(logging.INFO)
+    excel_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    excel_console_handler.setFormatter(excel_formatter)
+    excel_logger.addHandler(excel_console_handler)
+    excel_logger.warning(f"File logging failed, using console only: {e}")
 
 # Use the dedicated Excel logger
 logger = excel_logger
