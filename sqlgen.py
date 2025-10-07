@@ -202,9 +202,22 @@ def get_embed_model():
     global _embed_model_cache
     if _embed_model_cache is None:
         import os
-        # Create cache directory if it doesn't exist
-        cache_dir = os.path.expanduser("~/.cache/sentence_transformers")
-        os.makedirs(cache_dir, exist_ok=True)
+        # CRITICAL FIX: Use /tmp/ for Docker/HF Spaces (writable), fallback to home directory
+        try:
+            # Try /tmp first (works in Docker/HF Spaces)
+            if os.path.exists('/tmp') and os.access('/tmp', os.W_OK):
+                cache_dir = '/tmp/sentence_transformers'
+            else:
+                # Fallback to user home directory
+                cache_dir = os.path.expanduser("~/.cache/sentence_transformers")
+            
+            os.makedirs(cache_dir, exist_ok=True)
+            logger.info(f"Using cache directory: {cache_dir}")
+        except (PermissionError, OSError) as e:
+            # Last resort: use current directory
+            cache_dir = './sentence_transformers_cache'
+            os.makedirs(cache_dir, exist_ok=True)
+            logger.warning(f"Cache directory permission issue, using: {cache_dir}")
         
         logger.info(f"Loading embedding model: {EMBED_MODEL_NAME}")
         
