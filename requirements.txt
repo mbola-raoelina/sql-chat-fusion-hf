@@ -1,0 +1,48 @@
+# Enhanced Oracle SQL Assistant Requirements with AWS Bedrock Integration
+# Core dependencies for the enhanced SQL generation app
+
+# Web framework
+flask==3.0.0
+
+# AWS Bedrock Integration
+boto3>=1.34.0
+botocore>=1.34.0
+
+# SQL generation dependencies (preserved from original)
+sentence-transformers==2.7.0
+scikit-learn==1.4.0
+numpy>=1.21.0,<1.25.0
+requests==2.31.0
+
+# OpenAI integration (for fallback)
+openai>=1.35.0,<2.0.0
+python-dotenv==1.0.0
+
+# Hugging Face transformers for local models (compatible versions)
+transformers>=4.40.0,<5.0.0
+torch>=2.0.0,<3.0.0
+accelerate>=0.20.0
+bitsandbytes>=0.41.0
+
+# Pinecone integration
+pinecone>=7.3.0
+
+# Excel generation
+openpyxl==3.1.2
+pandas>=1.5.0,<2.2.0
+
+# SOAP/XML processing for Excel generation
+zeep==4.2.0
+lxml==4.9.0
+
+# Selenium for fallback Excel generation (optional)
+selenium==4.15.0
+
+# Additional utilities
+coloredlogs==15.0.1
+
+# AWS SDK dependencies
+urllib3>=1.26.0,<3.0.0
+certifi>=2023.0.0
+charset-normalizer>=3.0.0
+idna>=3.0.0

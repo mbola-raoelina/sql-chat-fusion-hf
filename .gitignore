@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+app_env/
+venv/
+ENV/
+env/
+
+# Environment variables
+.env
+.env.local
+
+# Debug logs
+*.log
+sqlgen_debug_*.log
+excel_debug_*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ChromaDB
+chroma_db/
+
+# Temporary test files
+test_*.py
+check_*.py
+diagnose_*.py
+analyze_*.py
+deep_*.py
+trace_*.py
+reindex_*.py
+
+# Scripts with credentials
+start_app.ps1
+start_app.bat
+

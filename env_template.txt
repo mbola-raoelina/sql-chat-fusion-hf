@@ -1,0 +1,108 @@
+# Oracle SQL Assistant - AWS Bedrock Enhanced Edition
+# Environment Configuration Template
+
+# ==============================================
+# AWS BEDROCK CONFIGURATION
+# ==============================================
+
+# AWS Credentials (required for Bedrock access)
+AWS_ACCESS_KEY_ID=your_aws_access_key_here
+AWS_SECRET_ACCESS_KEY=bedrock-api-key-YmVkcm9jay5hbWF6b25hd3MuY29tLz9BY3Rpb249Q2FsbFdpdGhCZWFyZXJUb2tlbiZYLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFTSUFYSFIzUU1WUDJUNU9PUDdVJTJGMjAyNTEwMDIlMkZjYS1jZW50cmFsLTElMkZiZWRyb2NrJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTEwMDJUMTMyMDM1WiZYLUFtei1FeHBpcmVzPTQzMjAwJlgtQW16LVNlY3VyaXR5LVRva2VuPUlRb0piM0pwWjJsdVgyVmpFSlglMkYlMkYlMkYlMkYlMkYlMkYlMkYlMkYlMkYlMkZ3RWFER05oTFdObGJuUnlZV3d0TVNKSE1FVUNJUURiJTJCbFBJTjNxVWVhSzBKMEFFaWM2VWN3RkUlMkZFa1hRTmNINmI5cDRMJTJCTjFnSWdIeWplak45UjNqdWg5SWRVcm1LUkx1dzZVMVpqZnRWcFJ2dlhtcGtjMkpVcWdBTUlMaEFER2d3ME9UY3lOamN5TnpFd01EY2lETk9ORkhST0NlUmw0Z045cENyZEF1T2cxVkpPZWpYTjFGNjgyb21qTWRRQkhuQnROWEY5RUZLTGR0cXppJTJCZjJmM0ltZWp2WWNMYVlhSW54SmNKMWgzWWlEVzl2WmxQREtFeTlUWDcwM1ZGdWt5OUpBYTE1dG9JaktWU1JCOURuUUZZOFBJem1BMHEyUHZ2Y0NzT21aS2xlN0dYVkY1SXpLdkswVVlSY2RReGdlbVVvaGhiaXpzTmsyVWdzVnBpdFE3c3RNRDk5cXlIZGd3YWpSJTJCR0VMZ05LMnBtUnRzQmRzaVFST0RQeGlsOHNBdm9jQXlwSzdRYTR4bFlRaXM4eGtRJTJCJTJCcFIwTmlzc1h3SGJySWtLZHNjZEVCOVNQYXdxN0MzcnZrTjQzVFJmTUU0VjlJcHdXdXN2RDFEZGZhZnRRTFFzaGpFRDcwUmRpJTJGQjNOSUhqT1MlMkI0Z1VJY2FHVDZtdCUyRjBHa0plJTJGSnlJQ0Y2aGdzVnRUektrQ2RGcjgxdGlXZTRmT01CbyUyRkJSd1YlMkYlMkZHck1GMXpiVExoSnJMVW02VUlEQWU3TWslMkZUd3JkeDliSlBaWkwlMkJLTjhrNEZNcWZMdmYlMkJycm9sc0NjRFZKdXYzWHFSJTJCbkpFUkZzWmNEa0h5ZVJFSkM4b1ZVd2olMkZYNXhnWTZqd0o5NURraiUyQiUyQmtwR2hsUE5wNUM3eDd4VmZWZkJZeW9DcXBlbW05bWlqTjFjQjJpZE4yYkZ1TFVycVRIVWQ5Y09xbkNUZEVvUGozSUhSNGlBYzBDOGtRQjI4UnlQT05MRDd3d1JNU01rOXFvVnU3ZUhzOExtJTJGeUxHTkxsamRrQ3ZIMGdQZU5LZ1NBQlRhTVcyRUJPcHU3STByUVRyZzlXWVpSSUEzVHpqczElMkZIQVdBMmR3REFYVFdyU1UlMkZSNHI0Z2NkNjJMQmtjSlhWYkdtVTdNR0M0Vk9NJTJGTm4wTXM0TzlyZ0JOeFVqVk9jMnNwem1pT3Zxelg1NHNXOGJmaEYzVG54ZHQ4MTRvcWlOeldEU0RDS0p4Z1BURlB0blhPS3A1bHBjZWFuRmJ1MFd4bDNSWWJ0YWlYSVdVQksxaFZDcnJoZWJVUGtuOEl2JTJCdG1icnlTcEN3OVFza0lwbEFpS1BpUDNBbFBJWXo0JTJCdiZYLUFtei1TaWduYXR1cmU9NWUzZDhhOTY1NjMxNjRiNjc4MGZhMzdjOTNiZTc0NmNjMzg0ZGUxMDZiMDEwYjM1NzA4ZjY4NWRlYWRmZDk4OCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmVmVyc2lvbj0x
+AWS_DEFAULT_REGION=us-east-1
+AWS_BEDROCK_REGION=us-east-1
+
+# Alternative: Use AWS IAM Role (recommended for production)
+# Leave AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY empty if using IAM role
+# AWS_ROLE_ARN=arn:aws:iam::123456789012:role/YourBedrockRole
+
+# ==============================================
+# OPENAI CONFIGURATION (Fallback)
+# ==============================================
+
+# OpenAI API Key (for fallback when Bedrock is unavailable)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# ==============================================
+# PINECONE CONFIGURATION
+# ==============================================
+
+# Pinecone API Configuration (for schema retrieval)
+PINECONE_API_KEY=your_pinecone_api_key_here
+PINECONE_ENVIRONMENT=your_pinecone_environment_here
+PINECONE_INDEX_NAME=sqlgen-schema-docs
+
+# ==============================================
+# APPLICATION CONFIGURATION
+# ==============================================
+
+# Flask Configuration
+FLASK_ENV=production
+FLASK_DEBUG=False
+SECRET_KEY=your_secret_key_here_change_this_in_production
+
+# Application Settings
+APP_PORT=7860
+APP_HOST=0.0.0.0
+
+# ==============================================
+# OPTIONAL CONFIGURATION
+# ==============================================
+
+# Model Selection Preferences
+DEFAULT_MODEL=claude-sonnet
+ENABLE_AUTO_MODEL_SELECTION=true
+ENABLE_FALLBACK=true
+
+# Performance Settings
+MAX_TOKENS=4000
+TEMPERATURE=0.1
+TIMEOUT_SECONDS=120
+
+# Logging Configuration
+LOG_LEVEL=INFO
+ENABLE_DEBUG_LOGGING=false
+
+# ==============================================
+# SECURITY CONFIGURATION
+# ==============================================
+
+# CORS Settings (if needed)
+CORS_ORIGINS=*
+
+# Rate Limiting (optional)
+RATE_LIMIT_ENABLED=false
+RATE_LIMIT_PER_MINUTE=60
+
+# ==============================================
+# DEPLOYMENT CONFIGURATION
+# ==============================================
+
+# For Hugging Face Spaces deployment
+HF_SPACE_ID=your_huggingface_space_id
+HF_TOKEN=your_huggingface_token
+
+# For Docker deployment
+DOCKER_BUILD=true
+DOCKER_TAG=oracle-sql-bedrock-enhanced
+
+# ==============================================
+# MONITORING AND ANALYTICS (Optional)
+# ==============================================
+
+# CloudWatch Logs (optional)
+CLOUDWATCH_LOG_GROUP=/aws/bedrock/oracle-sql-assistant
+CLOUDWATCH_LOG_STREAM=enhanced-edition
+
+# Metrics Collection (optional)
+ENABLE_METRICS=true
+METRICS_NAMESPACE=OracleSQLAssistant/Enhanced
+
+# ==============================================
+# NOTES
+# ==============================================
+
+# 1. Copy this file to .env and fill in your actual values
+# 2. Never commit .env file to version control
+# 3. For production, use AWS IAM roles instead of access keys
+# 4. Ensure Bedrock is enabled in your AWS account
+# 5. Test your configuration with the /diagnose endpoint
