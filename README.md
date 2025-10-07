@@ -1,3 +1,14 @@
+---
+title: Oracle SQL Assistant - Bedrock Enhanced
+emoji: 🤖
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: "4.44.0"
+app_file: app_enhanced.py
+pinned: false
+---
+
 # Oracle SQL Assistant - AWS Bedrock Enhanced Edition
 
 ## 🎯 Overview
